@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
         "target": "ES5",
         "rootDir": "src",
-        "outDir": "ts-built"
+        "outDir": "ts-built",
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "strict": true,
     }
 }
