@@ -1,5 +1,5 @@
-export interface PersonI {
-    ID: string,
+export interface UserI {
+    _id: string,
     firstName: string,
     lastName: string
 }
