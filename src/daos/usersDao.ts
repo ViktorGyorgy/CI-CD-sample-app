@@ -1,5 +1,5 @@
-import { UserI, } from "../models/user";
-import client from "./connector";
+import { UserI, } from '../models/user';
+import client from './connector';
 
 const userDB = client.db('application',).collection<UserI>('users',);
 

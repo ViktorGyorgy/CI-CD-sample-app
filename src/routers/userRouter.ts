@@ -1,5 +1,5 @@
-import { Router, } from "express";
-import { readUsers, readUserById, } from "../daos/usersDao";
+import { Router, } from 'express';
+import { readUsers, readUserById, } from '../daos/usersDao';
 
 const router = Router();
 

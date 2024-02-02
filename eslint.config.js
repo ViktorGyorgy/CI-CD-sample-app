@@ -1,24 +1,23 @@
 // eslint.config.js
-import stylistic from '@stylistic/eslint-plugin'
-import parserTs from '@typescript-eslint/parser'
+import stylistic from '@stylistic/eslint-plugin';
+import parserTs from '@typescript-eslint/parser';
 
 export default [
   {
     plugins: {
-      '@stylistic': stylistic
+      '@stylistic': stylistic,
     },
     languageOptions: {
       parser: parserTs,
     },
-    
-    files: ["src/**/*.ts"],
-    ignores: ["**/*.config.js"],
+    files: ['src/**/*.ts', 'eslint.config.js',],
     rules: {
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/semi': ['error', 'always'],
-      // '@stylistic/no-extra-semi': ['error', true],
-      "@stylistic/comma-dangle": ["error", "always"],
+      '@stylistic/comma-dangle': ['error', 'always',],
+      '@stylistic/indent': ['error', 2,],
+      '@stylistic/no-extra-semi': ['error',],
+      '@stylistic/quotes': ['error', 'single',],
+      '@stylistic/semi': ['error', 'always',],
       // ...
-    }
-  }
-]
+    },
+  },
+];
