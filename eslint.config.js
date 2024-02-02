@@ -14,10 +14,11 @@ export default [
     files: ["src/**/*.ts"],
     ignores: ["**/*.config.js"],
     rules: {
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/semi': ['error', 'always'],
-      // '@stylistic/no-extra-semi': ['error', true],
       "@stylistic/comma-dangle": ["error", "always"],
+      '@stylistic/indent': ['error', 2],
+      '@stylistic/no-extra-semi': ['error'],
+      '@stylistic/quotes': ['error', "single"],
+      '@stylistic/semi': ['error', 'always'],
       // ...
     }
   }
