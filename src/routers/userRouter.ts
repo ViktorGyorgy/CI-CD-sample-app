@@ -11,4 +11,9 @@ router.get('/:id', (req, res) =>{
     res.json(readUserById(req.params.id));
 });
 
+// TODO: add schema validation
+router.post('/', (req, res) => {
+    
+});
+
 export default router;
