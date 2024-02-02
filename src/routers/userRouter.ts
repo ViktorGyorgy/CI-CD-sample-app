@@ -13,7 +13,7 @@ router.get('/:id', (req, res) =>{
 
 // TODO: add schema validation
 router.post('/', (req, res) => {
-    res.send(readUsers())
+    res.send(readUsers());
 });
 
 export default router;
