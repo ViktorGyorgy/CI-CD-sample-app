@@ -1,14 +1,14 @@
 name: Deploy
 on:
-  workflow_run:
+  - workflow_run:
     workflows: [Test]
     types:
-      -completed
+      - completed
 
 jobs:
   deploy app:
     runs-on: self-hosted
     steps:
       - run: echo 'Hello world'
-      
+
 
