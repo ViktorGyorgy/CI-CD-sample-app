@@ -1,8 +1,9 @@
 name: Build
 on: 
-  workflow_run: [Test]
-  types:
-    - completed
+  workflow_run:
+    workflows: [Test]
+    types:
+      - completed
 
 jobs:
   build stuff:
