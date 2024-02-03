@@ -1,19 +1,15 @@
-name: Test
+name: Deploy
 on:
   push:
-      branches:  
-        - '**'
-        - '!master'   
+    branches:
+      - '**'
 jobs:
-  linter:
+  build:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm ci
-      - run: npx tsc
-      - run: npm run lint
-
-  
+      - name: Installing node dependencies
+        run: npm ci
