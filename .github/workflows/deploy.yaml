@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Save ssh key
-        run: echo "Key" > key.pem
+        run: echo ${{ secrets.DEPLOY_KEY }} > key.pem
       - name: delete files
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   build:
@@ -23,7 +23,9 @@ jobs:
       - name: Create docker tar from files
         run: npm run docker-tar
       - name: Save ssh key
-        run: echo "Key" > key.pem
-      - name: Send ssh key to server
+        run: echo ${{ secrets.DEPLOY_KEY }} > key.pem
+      - name: Send docker tar to server
         run: scp -i ./key.pem ./sample.tar ec2-user@51.21.128.140:.
+  upload_files:
+
   
