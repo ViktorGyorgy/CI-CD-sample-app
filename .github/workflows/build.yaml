@@ -1,9 +1,10 @@
 name: Build
-on: 
-  workflow_run:
-    workflows: [Test]
-    types: 
-      - completed
+# on: 
+#   workflow_run:
+#     workflows: [Test]
+#     types: 
+#       - completed
+on: push
 
 jobs:
   something:
