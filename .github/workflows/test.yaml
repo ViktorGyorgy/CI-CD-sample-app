@@ -1,13 +1,13 @@
 name: Test
 on: [push]
 jobs:
-  Test:
+  linter:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      # - run: npm ci
-      # - run: npx tsc
-      # - run: npm run lint
+      - run: npm ci
+      - run: npx tsc
+      - run: npm run lint
