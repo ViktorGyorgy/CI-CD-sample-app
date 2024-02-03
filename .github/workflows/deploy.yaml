@@ -26,6 +26,4 @@ jobs:
         run: echo ${{ secrets.DEPLOY_KEY }} > key.pem
       - name: Send docker tar to server
         run: scp -i ./key.pem ./sample.tar ec2-user@51.21.128.140:.
-  upload_files:
-
   
