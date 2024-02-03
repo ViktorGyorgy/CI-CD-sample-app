@@ -4,6 +4,13 @@ on:
     branches:
       - '**'
 jobs:
+  delete-files-on-vm:
+    runs-on: self-hosted
+    steps:
+      - name: Save ssh key
+        run: echo "Key" > key.pem
+      - name: delete files
+        run: ssh -i c:\Users\VIKTOOOOOOOOR\Documents\key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   build:
     runs-on: self-hosted
     steps:
@@ -18,4 +25,5 @@ jobs:
       - name: Save ssh key
         run: echo "Key" > key.pem
       - name: Send ssh key to server
-        run: scp -i ./key.pem ec2-user@51.21.128.140 ./sample.tar .
+        run: scp -i ./key.pem ./sample.tar ec2-user@51.21.128.140:.
+  
