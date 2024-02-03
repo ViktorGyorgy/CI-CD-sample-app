@@ -4,7 +4,11 @@ name: Build
 #     workflows: [Test]
 #     types: 
 #       - completed
-on: push
+on:
+  workflow_run:
+    workflows: [Test]
+    types:
+      - in_progress
 
 jobs:
   something:
