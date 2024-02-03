@@ -6,7 +6,7 @@ on:
       - completed
 
 jobs:
-  deploy app:
+  deploy-app:
     runs-on: self-hosted
     steps:
       - run: echo 'Hello world'
