@@ -4,10 +4,9 @@ on:
     workflows: [Test]
     types: 
       - completed
-    branches: '**'
 
 jobs:
-  build stuff:
+  something:
     runs-on: self-hosted
     steps:
       - run: echo Hello world
