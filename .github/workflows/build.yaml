@@ -8,7 +8,5 @@ on:
 jobs:
   build stuff:
     runs-on: self-hosted
-
     steps:
-      - name: Print hello world
-      run: echo Hello world
+      - run: echo Hello world
