@@ -6,7 +6,7 @@ name: Build
 #       - completed
 on:
   workflow_run:
-    workflows: [Test]
+    workflows: ["Test"]
     types:
       - in_progress
 
