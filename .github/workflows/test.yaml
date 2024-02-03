@@ -1,7 +1,7 @@
 name: Test
 on: [push]
 jobs:
-  testing:
+  Test:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
