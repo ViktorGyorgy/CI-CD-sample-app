@@ -6,6 +6,7 @@ on:
 
 jobs:
   exit-if-tests-failed:
+    runs-on: self-hosted
     if: github.event.Test.conclusion == 'success'
     steps:
       - run |
