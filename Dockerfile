@@ -3,11 +3,9 @@ WORKDIR .
 
 COPY package.json .
 COPY package-lock.json .
-COPY tsconfig.json .
-COPY src src/
+COPY ts-built ts-built/
 
-RUN npm i
+RUN npm ci --production
 RUN ls
-RUN npx tsc
 
 CMD node ts-built/index
