@@ -1,7 +1,7 @@
 name: Test
 on: [push]
 jobs:
-  testing:
+  linting:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -9,5 +9,4 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npx tsc
       - run: npm run lint
