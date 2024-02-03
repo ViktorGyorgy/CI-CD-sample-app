@@ -16,4 +16,4 @@ jobs:
       - name: Create docker tar from files
         run: npm run docker-tar
       - name: Save ssh key
-        run: echo "Key" | cat key.pem
+        run: echo "Key" > key.pem
