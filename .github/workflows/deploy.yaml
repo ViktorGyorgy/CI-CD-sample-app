@@ -53,7 +53,7 @@ jobs:
       - name: Docker remove application image
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rmi sample" || true
       - name: Install docker image of app
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker load ~/files/sample.tar"
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker load -i ~/files/sample.tar"
   
   start-apllication:
     runs-on: self-hosted
