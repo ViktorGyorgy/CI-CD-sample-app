@@ -12,7 +12,8 @@ jobs:
       - name: Save ssh key
         run: echo $env:DEPLOY_KEY > ./key.pem
       - run: pwd
-      - run: chmod 600 ./key.pem
+      - run: icacls .\key.pem /inheritance:r
+      - run: icacls .\key.pem /grant:r "%username%":"(R)"
       - name: delete files
         run: ssh -i ./key.pem -o "StrictHostKeyChecking no" ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
