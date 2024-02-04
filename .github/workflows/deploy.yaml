@@ -15,7 +15,7 @@ jobs:
           wc -l ./key.pem 
           chmod 600 ./key.pem
       - name: delete files
-        run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
+        run: ssh -i ./key.pem -o "StrictHostKeyChecking no" ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
   #   runs-on: self-hosted
   #   steps:
