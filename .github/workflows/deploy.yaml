@@ -9,7 +9,8 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      - run: echo $env:Greeting
+      - run: echo $env:Greeting > ./key.pem
+      - run: cat ./key.pem
       
 
   # delete-files-on-vm:
