@@ -35,7 +35,7 @@ jobs:
       - run: chmod 600 ./key.pem
       - name: Send docker tar to server 
         # run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:.
-        run: scp -i ./key.pem .env ec2-user@51.21.128.140:~/files
+        run: scp -i ./key.pem .env ec2-user@51.21.128.140:~/files/.
 
   stop-docker-containers:
     runs-on: self-hosted
