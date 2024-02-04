@@ -7,21 +7,12 @@ jobs:
   delete-files-on-vm:
     runs-on: self-hosted
     env:
-      Greeting: Hello
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
     steps:
-      - run: echo $env:Greeting > ./key.pem
-      - run: cat ./key.pem
-      
-
-  # delete-files-on-vm:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: Save ssh key
-  #       env: # Set the secret as an input
-  #         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-  #       run: echo $env:DEPLOY_KEY > ./key.pem
-  #     - name: delete files
-  #       run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
+      - name: Save ssh key
+        run: echo $env:DEPLOY_KEY > ./key.pem
+      - name: delete files
+        run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
   #   runs-on: self-hosted
   #   steps:
