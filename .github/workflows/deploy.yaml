@@ -15,7 +15,7 @@ jobs:
       - run: icacls .\key.pem /inheritance:r 
       - run: start-process "icacls.exe" -ArgumentList '.\key.pem /grant:r "$env:USERNAME":"(R)"'
       - name: delete files
-        run: ssh -i ./key.pem -o "StrictHostKeyChecking no" ec2-user@51.21.128.140 "rm ./*; exit"
+        run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
   #   runs-on: self-hosted
   #   steps:
