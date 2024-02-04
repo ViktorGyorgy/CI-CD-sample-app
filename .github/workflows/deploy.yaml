@@ -10,8 +10,7 @@ jobs:
       - name: Save ssh key
         env: # Set the secret as an input
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        run: echo "$DEPLOY_KEY" > ./key.pem
-      - run: echo "$DEPLOY_KEY"
+        run: echo $env:DEPLOY_KEY > ./key.pem
       - name: delete files
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
