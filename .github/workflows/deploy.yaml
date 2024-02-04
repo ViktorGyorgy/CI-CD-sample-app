@@ -28,8 +28,8 @@ jobs:
           node-version: 20
       - name: Installing node dependencies
         run: npm ci
-      - name: Create docker tar from files
-        run: npm run docker-tar
+      # - name: Create docker tar from files
+      #   run: npm run docker-tar
       - name: Save ssh key
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
