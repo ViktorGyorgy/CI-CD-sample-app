@@ -14,7 +14,7 @@ jobs:
       - run: chmod 600 ./key.pem
       - run: cat ./key.pem
       - name: delete files
-        run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
+        run: ssh -i ./key.pem ec2-user@51.21.128.140
   # build:
   #   runs-on: self-hosted
   #   steps:
