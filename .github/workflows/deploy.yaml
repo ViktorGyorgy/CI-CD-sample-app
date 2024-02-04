@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Save ssh key
         run: echo $env:DEPLOY_KEY > ./key.pem
+      - run: cat ./key.pem
       - name: delete files
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
