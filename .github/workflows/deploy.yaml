@@ -9,7 +9,7 @@ jobs:
     env:
       Greeting: Hello
     steps:
-      run: echo $env:Greeting
+      - run: echo $env:Greeting
       
 
   # delete-files-on-vm:
