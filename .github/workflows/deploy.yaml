@@ -12,14 +12,11 @@ jobs:
       - name: Save ssh key
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
-      - name: delete files
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm -f ./*"
-      - name: stop docker containers
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)" || true
-      - name: Docker rm application images
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rm sample" || true
+      # - name: delete files
+      #   run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm -f ./*"
+      
   
-  build:
+  build-and-copy-files-to-host:
     runs-on: self-hosted
     needs: delete-files-on-vm
     env:
@@ -37,5 +34,19 @@ jobs:
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
       - name: Send docker tar to server 
-        run: scp -i ./key.pem ./sample.tar ./compose.yaml ec2-user@51.21.128.140:.
-  
+        # run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:.
+        run: scp -i ./key.pem .env ec2-user@51.21.128.140:.
+
+  stop-docker-containers:
+    runs-on: self-hosted
+    needs: build-and-copy-files-to-host
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+    steps:
+      - name: Save ssh key
+        run: echo "$DEPLOY_KEY" > ./key.pem
+      - run: chmod 600 ./key.pem
+      - name: stop docker containers
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)" || true
+      - name: Docker rm application images
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rm sample" || true
