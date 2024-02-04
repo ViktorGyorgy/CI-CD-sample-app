@@ -8,22 +8,22 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Save ssh key
-        run: echo "${{ secrets.DEPLOY_KEY }}"" > key.pem
+        run: echo "${{ secrets.DEPLOY_KEY }}" > key.pem
       - name: delete files
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
-  build:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - name: Installing node dependencies
-        run: npm ci
-      - name: Create docker tar from files
-        run: npm run docker-tar
-      - name: Save ssh key
-        run: echo "${{ secrets.DEPLOY_KEY }}"" > key.pem
-      - name: Send docker tar to server
-        run: scp -i ./key.pem ./sample.tar ec2-user@51.21.128.140:.
+  # build:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 20
+  #     - name: Installing node dependencies
+  #       run: npm ci
+  #     - name: Create docker tar from files
+  #       run: npm run docker-tar
+  #     - name: Save ssh key
+  #       run: echo "${{ secrets.DEPLOY_KEY }}" > key.pem
+  #     - name: Send docker tar to server
+  #       run: scp -i ./key.pem ./sample.tar ec2-user@51.21.128.140:.
   
