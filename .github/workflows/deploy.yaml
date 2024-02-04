@@ -11,9 +11,7 @@ jobs:
     steps:
       - name: Save ssh key
         run: echo $env:DEPLOY_KEY > ./key.pem
-      - run: pwd
-      - run: icacls .\key.pem /inheritance:r 
-      - run: start-process "icacls.exe" -ArgumentList '.\key.pem /grant:r "$env:USERNAME":"(R)"'
+      - run: chmod 600 ./key.pem
       - name: delete files
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
