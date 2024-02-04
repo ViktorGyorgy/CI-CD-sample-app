@@ -13,7 +13,7 @@ jobs:
         run: echo $env:DEPLOY_KEY > ./key.pem
       - run: pwd
       - run: icacls .\key.pem /inheritance:r
-      - run: icacls .\key.pem /grant:r "%username%":"(R)"
+      - run: icacls .\key.pem /grant:r "$env:username":"(R)"
       - name: delete files
         run: ssh -i ./key.pem -o "StrictHostKeyChecking no" ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
