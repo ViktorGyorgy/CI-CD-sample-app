@@ -29,12 +29,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+      using: 'docker'
       - name: Installing node dependencies
         run: npm ci
       - name: Create docker tar from files
         run: npm run docker-tar
       - name: Save ssh key
-        run: echo "${{ secrets.DEPLOY_KEY }}" > key.pem
-      - name: Send docker tar to server
+        run: echo "$DEPLOY_KEY" > ./key.pem
+      - run: chmod 600 ./key.pem
+      - name: Send docker tar to server 
         run: scp -i ./key.pem ./sample.tar ./compose.yaml ec2-user@51.21.128.140:.
   
