@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker-build": "npx tsc && docker rm sample && docker build -t sample .",
+    "docker-build": "npx tsc && (docker rmi sample || true) && docker build -t sample .",
     "docker-tar": "npm run docker-build && docker save --output ./sample.tar sample",
     "lint": "eslint .",
     "lint-fix": "eslint --fix ."
