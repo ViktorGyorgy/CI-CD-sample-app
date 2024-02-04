@@ -19,19 +19,22 @@ jobs:
       - name: Docker rm application images
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rm sample" || true
   
-  # build:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 20
-  #     - name: Installing node dependencies
-  #       run: npm ci
-  #     - name: Create docker tar from files
-  #       run: npm run docker-tar
-  #     - name: Save ssh key
-  #       run: echo "${{ secrets.DEPLOY_KEY }}" > key.pem
-  #     - name: Send docker tar to server
-  #       run: scp -i ./key.pem ./sample.tar ec2-user@51.21.128.140:.
+  build:
+    runs-on: self-hosted
+    needs: delete-files-on-vm
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Installing node dependencies
+        run: npm ci
+      - name: Create docker tar from files
+        run: npm run docker-tar
+      - name: Save ssh key
+        run: echo "${{ secrets.DEPLOY_KEY }}" > key.pem
+      - name: Send docker tar to server
+        run: scp -i ./key.pem ./sample.tar ./compose.yaml ec2-user@51.21.128.140:.
   
