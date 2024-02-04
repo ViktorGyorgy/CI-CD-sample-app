@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Save ssh key
-        run: echo "${{ secrets.DEPLOY_KEY }}" > key.pem
+        run: echo "${{ secrets.DEPLOY_KEY }}" > ./key.pem
       - name: delete files
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
