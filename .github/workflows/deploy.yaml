@@ -34,12 +34,12 @@ jobs:
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
       - name: Create files folder
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "mkdir ~/files"
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "mkdir ~/files" || true
       - name: Send docker tar to server 
         # run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:.
         run: scp -i ./key.pem .env ec2-user@51.21.128.140:~/files/.
 
-  stop-docker-containers: 
+  prepare-new-docker-files: 
     runs-on: self-hosted
     needs: build-and-copy-files-to-host
     env:
@@ -50,5 +50,19 @@ jobs:
       - run: chmod 600 ./key.pem
       - name: stop docker containers
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)" || true
-      - name: Docker rm application images
+      - name: Docker remove application image
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rmi sample" || true
+      - name: Install docker image of app
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker import ~/files/sample.tar"
+  
+  start-apllication:
+    runs-on: self-hosted
+    needs: prepare-new-docker-files
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+    steps:
+      - name: Save ssh key
+        run: echo "$DEPLOY_KEY" > ./key.pem
+      - run: chmod 600 ./key.pem
+      
+
