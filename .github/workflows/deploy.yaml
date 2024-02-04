@@ -15,7 +15,7 @@ jobs:
       - name: delete files
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm -f ./*"
       - name: stop docker containers
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)"
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)" || true
       - name: Docker rm application images
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rm sample"
   
