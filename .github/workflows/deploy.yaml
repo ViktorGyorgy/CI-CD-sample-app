@@ -29,7 +29,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      using: 'docker'
       - name: Installing node dependencies
         run: npm ci
       - name: Create docker tar from files
