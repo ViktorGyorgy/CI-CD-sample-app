@@ -51,4 +51,4 @@ jobs:
       - name: stop docker containers
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)" || true
       - name: Docker rm application images
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rm sample" || true
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker rmi sample" || true
