@@ -10,7 +10,7 @@ jobs:
       DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
     steps:
       - name: Save ssh key
-        run: echo $env:DEPLOY_KEY > ./key.pem
+        run: echo $DEPLOY_KEY > ./key.pem
       - run: chmod 600 ./key.pem
       - run: cat ./key.pem
       - name: delete files
