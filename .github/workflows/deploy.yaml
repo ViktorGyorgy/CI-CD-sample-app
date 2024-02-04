@@ -12,9 +12,13 @@ jobs:
       - name: Save ssh key
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
-      - run: pwd
       - name: delete files
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm ./*" 
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm ./*"
+      - name: stop docker containers
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)"
+      - name: docker rm sample
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker stop $(docker ps -a -q)"
+  
   # build:
   #   runs-on: self-hosted
   #   steps:
