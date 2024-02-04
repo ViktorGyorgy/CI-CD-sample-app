@@ -13,7 +13,7 @@ jobs:
         run: echo $DEPLOY_KEY > ./key.pem
       - run: chmod 600 ./key.pem
       - run: pwd
-      - name: delete files
+      - name: delete files 
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140
   # build:
   #   runs-on: self-hosted
