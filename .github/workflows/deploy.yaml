@@ -10,11 +10,11 @@ jobs:
       DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
     steps:
       - name: Save ssh key
-        run: echo $env:DEPLOY_KEY > ~/key.pem
+        run: echo $env:DEPLOY_KEY > ./key.pem
       - run: pwd
-      - run: chmod 600 ~/key.pem
+      - run: chmod 600 ./key.pem
       - name: delete files
-        run: ssh -i ~/key.pem -o "StrictHostKeyChecking no" ec2-user@51.21.128.140 "rm ./*; exit"
+        run: ssh -i ./key.pem -o "StrictHostKeyChecking no" ec2-user@51.21.128.140 "rm ./*; exit"
   # build:
   #   runs-on: self-hosted
   #   steps:
