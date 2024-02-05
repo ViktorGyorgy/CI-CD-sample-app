@@ -48,7 +48,7 @@ jobs:
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
       - name: Delete docker containers
-        run : ssh -i ./key.pem ec2-user@51.21.128.140 "docker rm -f $(docker ps -qa)" || true
+        run : ssh -i ./key.pem ec2-user@51.21.128.140 'docker rm -f $(docker ps -qa)' || true
       - name: Docker remove application image
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "docker rmi sample" || true
       - name: Install docker image of app
