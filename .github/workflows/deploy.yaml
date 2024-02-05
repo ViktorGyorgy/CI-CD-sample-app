@@ -55,7 +55,7 @@ jobs:
       - name: Install docker image of app
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker load -i ~/files/sample.tar"
       - name: Start the docker stuff
-        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "cd files; docker compose up"
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "cd files; docker-compose up"
       
       
 
