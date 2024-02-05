@@ -12,8 +12,8 @@ jobs:
       - name: Save ssh key
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
-      # - name: delete files
-      #   run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm -fr ~/files"
+      - name: delete files
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm -fr ~/files"
       
   
   build-and-copy-files-to-host:
@@ -33,10 +33,10 @@ jobs:
       - name: Save ssh key
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
-      # - name: Create files folder
-      #   run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "mkdir ~/files" || true
-      # - name: Send files to server 
-      #   run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:~/files/.
+      - name: Create files folder
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "mkdir ~/files" || true
+      - name: Send files to server 
+        run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:~/files/.
 
   start-new-docker: 
     runs-on: self-hosted
