@@ -1,0 +1,25 @@
+services:
+  database:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+    command: --quiet
+  backend:
+    image: sample-dev
+    ports: 
+      - "3000:3000"
+    restart: always
+    environment:
+      MONGODB_URL: mongodb://database:27017/${MONGODB_DATABASE}
+    depends_on:
+      - database
+    links:
+      - database
+    volumes:
+      - type: bind
+        source: ./src
+        target: /src/
+      - type: bind
+        source: .
+        target: /project/

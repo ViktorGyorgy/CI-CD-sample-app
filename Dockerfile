@@ -6,6 +6,5 @@ COPY package-lock.json .
 COPY ts-built ts-built/
 
 RUN npm ci --production
-RUN ls
 
 CMD node ts-built/index
