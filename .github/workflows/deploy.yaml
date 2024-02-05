@@ -28,16 +28,15 @@ jobs:
           node-version: 20
       - name: Installing node dependencies
         run: npm ci
-      # - name: Create docker tar from files
-        # run: npm run docker-tar
+      - name: Create docker tar from files
+        run: npm run docker-tar
       - name: Save ssh key
         run: echo "$DEPLOY_KEY" > ./key.pem
       - run: chmod 600 ./key.pem
       - name: Create files folder
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "mkdir ~/files" || true
       - name: Send docker tar to server 
-        # run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:~/files/.
-        run: scp -i ./key.pem .env ./compose.yaml ec2-user@51.21.128.140:~/files/.
+        run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:~/files/.
 
   start-new-docker: 
     runs-on: self-hosted
@@ -58,6 +57,14 @@ jobs:
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "docker load -i ~/files/sample.tar"
       - name: Start the docker stuff
         run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "cd files; docker-compose up -d"
-      
+
+
+  clean-up:
+    needs: start-new-docker
+    runs-on: self-hosted
+    if: ${{ always() }}
+    steps:
+      - name: remove files
+      - run: rm ./* -rf
       
 
