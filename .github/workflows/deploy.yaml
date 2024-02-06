@@ -1,0 +1,68 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  delete-files-on-vm:
+    runs-on: self-hosted
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+    steps:
+      - name: Save ssh key
+        run: echo "$DEPLOY_KEY" > ./key.pem
+      - run: chmod 600 ./key.pem
+      - name: delete files
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "rm -fr ~/files" 
+      
+  
+  build-and-copy-files-to-host:
+    runs-on: self-hosted
+    needs: delete-files-on-vm
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Installing node dependencies
+        run: npm ci
+      - name: Create docker tar from files
+        run: npm run docker-tar
+      - name: Save ssh key
+        run: echo "$DEPLOY_KEY" > ./key.pem
+      - run: chmod 600 ./key.pem
+      - name: Create files folder
+        run: ssh -i ./key.pem -T ec2-user@51.21.128.140 "mkdir ~/files" || true
+      - name: Send files to server 
+        run: scp -i ./key.pem .env ./sample.tar ./compose.yaml ec2-user@51.21.128.140:~/files/.
+
+  start-new-docker: 
+    runs-on: self-hosted
+    needs: build-and-copy-files-to-host
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+    steps:
+      - name: Save ssh key
+        run: echo "$DEPLOY_KEY" > ./key.pem
+      - run: chmod 600 ./key.pem
+      - name: Delete docker containers
+        run : ssh -i ./key.pem ec2-user@51.21.128.140 'docker rm -f $(docker ps -qa)' || true
+      - name: Docker remove application image
+        run: ssh -i ./key.pem ec2-user@51.21.128.140 "docker rmi sample" || true
+      - name: Install docker image of app
+        run: ssh -i ./key.pem ec2-user@51.21.128.140 "docker load -i ~/files/sample.tar"
+      - name: Start the docker stuff 
+        run: ssh -i ./key.pem ec2-user@51.21.128.140 "cd files; docker-compose up -d"
+
+
+  clean-up:
+    needs: start-new-docker
+    runs-on: self-hosted
+    if: ${{ always() }}
+    steps:
+      - name: remove files
+        run: rm ./* -rf 
+      
+
