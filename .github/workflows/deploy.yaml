@@ -51,6 +51,8 @@ jobs:
         run : ssh -i ./key.pem ec2-user@51.21.128.140 'docker rm -f $(docker ps -qa)' || true
       - name: Docker remove application image
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "docker rmi sample" || true
+      - name: Remove docker volumes
+        run: Docker volume prune
       - name: Install docker image of app
         run: ssh -i ./key.pem ec2-user@51.21.128.140 "docker load -i ~/files/sample.tar"
       - name: Start the docker stuff 
