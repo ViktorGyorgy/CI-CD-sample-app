@@ -1,20 +1,20 @@
-# name: Test
-# on:
-#   push:
-#       branches:  
-#         - '**'
-#         - '!master'   
-# jobs:
-#   linter:
-#     runs-on: self-hosted
-#     steps:
-#       - run: echo 'helo'
-#       # - uses: actions/checkout@v4
-#       # - uses: actions/setup-node@v3
-#       #   with:
-#       #     node-version: 20
-#       # - run: npm ci
-#       # - run: npx tsc
-#       # - run: npm run lint
+name: Test
+on:
+  push:
+      branches:  
+        - '**'
+        - '!main'   
+jobs:
+  linter:
+    runs-on: self-hosted
+    steps:
+      - run: echo 'helo'
+      # - uses: actions/checkout@v4
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 20
+      # - run: npm ci
+      # - run: npx tsc
+      # - run: npm run lint
 
   
