@@ -59,5 +59,5 @@ Made a Postman test profile, which can be found in the postman-config folder.
 
 ## If you want to test it
 The current ec2 instance's public IPv4 address is: 51.21.128.140, with por 3000 open. You can download and import the Postman profile, or try to break it in other ways.  
-If you want to run it locally, in project folder run ```npm i``` and ```npm run docker-compose```.
+If you want to run it locally, in the project folder run ```npm i``` and ```npm run docker-compose```.
 
