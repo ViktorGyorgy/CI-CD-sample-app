@@ -2,7 +2,6 @@
 A Node.js REST API for managing users, and CI/CD pipelines implemented using GitHub actions.
 
 
-
 ## GitHub setup
 - GitHub workflow which runs linter for every push (linter settings are customized).
 - Merge requests can't be approved if the linter gives errors.
