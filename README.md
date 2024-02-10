@@ -54,7 +54,7 @@ Created scripts for easier executions of:
 
 ## Schema Validation and Postman
 Used joi.dev for validating the body of post requests. Configured joi to send back all the irregularities in the payload.
-Made a Postman test profile, which can be found in the postman-config folder.
+Made a Postman test profile, which can be found in the postman-tests folder.
 
 ## If you want to test it
 The current ec2 instance's public IPv4 address is: 51.21.128.140, with por 3000 open. You can download and import the Postman profile, or try to break it in other ways.  
