@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "4e71f0ef-ba4a-4bc0-8ea7-6dc3988be7d8",
+		"name": "CI/CD sample tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20585972"
+	},
+	"item": [
+		{
+			"name": "Main Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "51.21.128.140:3000",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "51.21.128.140:3000/users",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": 10000000000,\r\n    \"firstName\": \"Someone\",\r\n    \"lastName\": \"Anyone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "51.21.128.140:3000/users",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post User Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": 10000000000,\r\n    \"firstName\": \"Someone\",\r\n    \"lastName\": \"Anyone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "51.21.128.140:3000/users",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "51.21.128.140:3000/users/10000000000",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"10000000000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User With Non Existent Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "51.21.128.140:3000/users/90000000001",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"90000000001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post User Bad Format",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": 5557,\r\n    \"firstName\": 6666\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "51.21.128.140:3000/users",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post User Additional Fields",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": 5557,\r\n    \"firstName\": \"Someone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "51.21.128.140:3000/users",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Bad Json Fomat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"something\", 523432 \"apple\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "51.21.128.140:3000/users",
+					"host": [
+						"51",
+						"21",
+						"128",
+						"140"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
