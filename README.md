@@ -3,11 +3,12 @@ A Node.js REST API for managing users, and CI/CD pipelines implemented using Git
 
 
 ## GitHub setup
+- Set up of local GitHub actions runner, for faster execution.
 - GitHub workflow which runs linter for every push (linter settings are customized).
 - Merge requests can't be approved if the linter gives errors.
 - Main branch is protected, no one can push directly to it.
 - On every push to the main, the ts codebase is compiled into js, then the js codebase is dockerized and deployed to a running AWS ec2 instance.
-- The key.pem file is saved as a GitHub secret, it can only be accessed by GitHub actions.
+- The key.pem file is saved as a GitHub secret, it can only be accessed by the GitHub actions.
 
 ## Dockerization and Docker-compose
 - A backend container and mongodb container is orchestrated using Docker-compose.
