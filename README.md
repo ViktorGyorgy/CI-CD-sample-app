@@ -61,7 +61,7 @@ Created scripts for easier executions of:
 ```
 
 ## Schema Validation
-Used joi.dev for validating the body of post requests. Configured joi to send back all the irregularities in the payload.
+Used joi.dev for validating the body of post requests. Configured joi to send back all the irregularities in one payload.
 
 
 
