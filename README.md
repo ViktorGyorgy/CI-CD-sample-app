@@ -1,26 +1,33 @@
 # About the project:
-A Node.js REST API for managing users, and CI/CD pipelines implemented using GitHub actions.
+A REST API for managing users, and a CI/CD pipeline implemented with GitHub actions.
+
+## Accessing the API
+Currently you can interact with the API at: ```51.21.128.140:3000```.  
+You can download and import the Postman profile (located in postman-tests folder), or try it out in other ways.  
+If you want to run it locally, clone the repo and in the project folder run ```npm i``` and ```npm run docker-compose```.
 
 
-## GitHub setup
-- Set up of local GitHub actions runner, for faster execution.
-- GitHub workflow which runs linter for every push (linter settings are customized).
-- Merge requests can't be approved if the linter gives errors.
-- Main branch is protected, no one can push directly to it.
-- On every push to the main, the ts codebase is compiled into js, then the js codebase is dockerized and deployed to a running AWS ec2 instance.
-- The key.pem file is saved as a GitHub secret, it can only be accessed by the GitHub actions.
+## Automated Development & Deployment Pipeline
 
-## Dockerization and Docker-compose
-- A backend container and mongodb container is orchestrated using Docker-compose.
-- Two configuration for environments: dev and prod.
-- On prod environment, the Mongo docker is set up with authentication.
+This repository leverages GitHub Actions to streamline development and deployment processes:
+
+- **Local Runner**: A local GitHub Actions runner is configured for faster execution of workflows.
+- **Linting on Push**: A custom linter workflow runs on every push to ensure code quality. Merge requests requiring approval will fail if linting errors are present.
+- **Protected Main Branch**: The main branch is protected, preventing direct pushes.
+- **Automatic Deployment**: Whenever the main branch is updated, the application is redeployed to a running AWS EC2 instance.
+- **Secure Credentials**: The key.pem file, used for AWS access, is securely stored as a GitHub Secret, accessible only by the Actions runner.
+
+## Containerization and Orchestration
+- The backend Docker container and mongodb Docker container is orchestrated with Docker-compose.
+- There are two different configurations for dev and prod environments.
+- On prod environment, the Mongo container needs authentication.
 - On dev environment, the project folder is bind mounted and the server is live realoaded whenever the code files change.
 
 ## Npm scripts
 Created scripts for easier executions of:
 - Linter fix (solves the easier format errors).
-- Creating docker images and removing old ones, running app with docker compose up.
-- Building new docker iamge and saving it in .tar format.
+- Creating docker images and removing old ones, running the app with docker compose up.
+- Building a new docker image and saving it in .tar format.
 
 ## REST API routes:
 'GET /': The server sends back a 'Hello' string.  
@@ -42,22 +49,19 @@ Created scripts for easier executions of:
     type of firstName: string
     restrictions: 2 <= len(firstName) <= 50
   */
-  "firstName": "Xin",
+  "firstName": "Voli",
 
   /*
     type of lastName: string
     restrictions: 2 <= len(lastName) <= 50
   */
-  "lastName": "Zhao"
+  "lastName": "Bear"
 }
 
 ```
 
-## Schema Validation and Postman
+## Schema Validation
 Used joi.dev for validating the body of post requests. Configured joi to send back all the irregularities in the payload.
-Made a Postman test profile, which can be found in the postman-config folder.
 
-## If you want to test it
-The current ec2 instance's public IPv4 address is: 51.21.128.140, with por 3000 open. You can download and import the Postman profile, or try to break it in other ways.  
-If you want to run it locally, in the project folder run ```npm i``` and ```npm run docker-compose```.
+
 
